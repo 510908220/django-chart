@@ -1,0 +1,42 @@
+{% load chartkick %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>普通图表</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/highcharts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/chartkick.js' %}"></script>
+</head>
+<body>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">饼图</div>
+    <div class="panel-body">
+        {% pie_chart render_data with library={"title":"Browser Statistics, May 2013"} %}
+    </div>
+</div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">竖柱状图</div>
+    <div class="panel-body">
+        {% column_chart render_data %}
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">横柱状图</div>
+    <div class="panel-body">
+        {% bar_chart render_data with id='sizes' %}
+    </div>
+</div>
+
+
+</body>
+</html>
