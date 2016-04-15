@@ -257,6 +257,13 @@
       },
       plotOptions: {
         areaspline: {},
+        dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
         series: {
           marker: {}
         }
@@ -313,6 +320,7 @@
     renderPieChart = function (element, series, opts) {
       var options = merge(defaultOptions, opts.library || {});
       options.chart.renderTo = element.id;
+
       options.series = [{
         type: "pie",
         name: "Value",

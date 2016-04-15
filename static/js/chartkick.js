@@ -330,6 +330,9 @@
               }
             };
           }
+
+          
+
           var options = jsOptions(chart.data, chart.options, chartOptions), data, i, j;
           options.xAxis.type = chart.options.discrete ? "category" : "datetime";
           options.chart.type = chartType;
@@ -359,13 +362,27 @@
         };
 
         this.renderPieChart = function (chart) {
-          var chartOptions = {};
+          var chartOptions = {
+
+
+          };
+
+         
+
           if (chart.options.colors) {
             chartOptions.colors = chart.options.colors;
           }
           var options = merge(merge(defaultOptions, chartOptions), chart.options.library || {});
           options.chart.renderTo = chart.element.id;
+
           options.series = [{
+            dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
             type: "pie",
             name: chart.options.label || "Value",
             data: chart.data
