@@ -33,6 +33,8 @@ def get_render_data(chart_type, chart_data):
             result.append([first.strip(), string_to_int_or_float(second)])
         else:
             result[first.strip()] = string_to_int_or_float(second)
+    if isinstance(result, list):
+        result.sort(key = lambda item:item[1], reverse=True)
     return result
 
 
