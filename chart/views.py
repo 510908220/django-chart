@@ -22,7 +22,13 @@ def get_render_data(chart_type, chart_data):
         line = line.strip()
         if not line:
             continue
-        first, second = line.split(",")
+
+        tmp_list = line.split(",")
+
+        second = tmp_list[-1]
+        first = ",".join(tmp_list[0:-1])
+
+
         if chart_type == "1":
             result.append([first.strip(), string_to_int_or_float(second)])
         else:
