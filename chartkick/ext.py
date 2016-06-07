@@ -1,3 +1,7 @@
+"""
+ext module
+"""
+
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
@@ -15,6 +19,9 @@ from .options import Options
 
 
 class ChartExtension(Extension):
+    """
+    Chart 
+    """
     tags = set(['line_chart', 'pie_chart', 'column_chart',
                 'bar_chart', 'area_chart'])
 
