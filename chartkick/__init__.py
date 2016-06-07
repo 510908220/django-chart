@@ -2,7 +2,7 @@ from __future__ import absolute_import
 import os
 
 VERSION = (0, 4, 2)
-__version__ = '.'.join(map(str, VERSION))
+__version__ = '.'.join([str(v) for v in VERSION])
 
 
 def js():

@@ -5,7 +5,8 @@ import logging
 
 
 class Options(dict):
-    def __init__(self, *args, **kwargs) :
+
+    def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
 
     def load(self, filename):
@@ -13,8 +14,8 @@ class Options(dict):
             options = json.loads(jsonfile.read())
             self.clear()
             for option in options:
-                id = option.get('id', None)
-                if id is None:
+                id_ = option.get('id', None)
+                if id_ is None:
                     logging.warning("Missing chart 'id' in %s" % option)
                     continue
-                self.update({id: option})
+                self.update({id_: option})
