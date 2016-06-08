@@ -19,6 +19,6 @@ class Options(dict):
             for option in options:
                 id_ = option.get('id', None)
                 if id_ is None:
-                    logging.warning("Missing chart 'id' in %s" ,option)
+                    logging.warning("Missing chart 'id' in %s", option)
                     continue
                 self.update({id_: option})

@@ -76,7 +76,7 @@ class ChartNode(template.Node):
         return cls._library.get(chart_id, {})
 
 
-def chart(name, parser, token):
+def chart(name, _, token):
     """
     chart description
     """

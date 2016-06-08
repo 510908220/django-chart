@@ -20,7 +20,7 @@ from .options import Options
 
 def _chart_class_name(tag_name):
     "converts chart tag name to javascript class name"
-    return ''.join([str.title for s in tag_name.split('_')])
+    return ''.join([str.title(s) for s in tag_name.split('_')])
 
 
 class ChartExtension(Extension):
