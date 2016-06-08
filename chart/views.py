@@ -10,11 +10,7 @@ def index(request):
 
 
 def string_to_int_or_float(value):
-    try:
-        value = float(value.strip())
-    except ValueError:
-        value = -1
-    return value
+    return float(value.strip())
 
 
 def get_render_data(chart_type, chart_data):
