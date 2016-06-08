@@ -18,9 +18,14 @@ from .template import CHART_HTML
 from .options import Options
 
 
+def _chart_class_name(tag_name):
+    "converts chart tag name to javascript class name"
+    return ''.join([str.title for s in tag_name.split('_')])
+
+
 class ChartExtension(Extension):
     """
-    Chart 
+    Chart
     """
     tags = set(['line_chart', 'pie_chart', 'column_chart',
                 'bar_chart', 'area_chart'])
@@ -66,20 +71,20 @@ class ChartExtension(Extension):
         return nodes.CallBlock(self.call_method(support_func, args),
                                [], [], []).set_lineno(chart_tag.lineno)
 
-    def _chart_support(self, name, data, caller, **kwargs):
+    def _chart_support(self, name, data, **kwargs):
         "template chart support function"
-        id = 'chart-%s' % next(self.id)
-        name = self._chart_class_name(name)
+        _id = 'chart-%s' % next(self.id)
+        name = _chart_class_name(name)
         options = dict(self.environment.options)
-        options.update(name=name, id=id)
+        options.update(name=name, id=_id)
 
         # jinja2 prepends 'l_' to keys
         kwargs = dict((k[2:], v) for (k, v) in kwargs.items())
 
         if self._library is None:
             self._library = self.load_library()
-        id = kwargs.get('id', '')
-        library = self._library.get(id, {})
+        _id = kwargs.get('id', '')
+        library = self._library.get(_id, {})
 
         # apply options from a tag
         library.update(kwargs.get('library', {}))
@@ -89,10 +94,6 @@ class ChartExtension(Extension):
         options.update(kwargs)
         return CHART_HTML.format(data=data, options=json.dumps(kwargs),
                                  **options)
-
-    def _chart_class_name(self, tag_name):
-        "converts chart tag name to javascript class name"
-        return ''.join(map(str.title, tag_name.split('_')))
 
     def load_library(self):
         "loads configuration options"
