@@ -1,3 +1,6 @@
+"""
+templatetag module
+"""
 from __future__ import absolute_import
 
 import os
@@ -18,6 +21,9 @@ register = template.Library()
 
 
 class ChartNode(template.Node):
+    """
+    ChartNode description
+    """
     id = itertools.count()
     _library = None
 
@@ -40,10 +46,10 @@ class ChartNode(template.Node):
                 self.options[name] = value.resolve(context)
 
         options = dict(id='chart-%s' % next(self.id), height='300px')
-        id = self.options.get('id', None) or options['id']
+        _id = self.options.get('id', None) or options['id']
 
         # apply options from chartkick.json
-        options.update(library=self.library(id))
+        options.update(library=self.library(_id))
         # apply options from a tag
         options.update(self.options)
 
@@ -53,6 +59,9 @@ class ChartNode(template.Node):
 
     @classmethod
     def library(cls, chart_id):
+        """
+        library description
+        """
         if cls._library is None:
             loader = Loader(Engine())
             for filename in loader.get_template_sources('chartkick.json'):
@@ -68,12 +77,15 @@ class ChartNode(template.Node):
 
 
 def chart(name, parser, token):
+    """
+    chart description
+    """
     args = token.split_contents()
 
     if len(args) < 2:
         raise template.TemplateSyntaxError(
-                '%r statement requires at least one argument' %
-                token.split_contents()[0])
+            '%r statement requires at least one argument' %
+            token.split_contents()[0])
 
     options = None
     if len(args) > 2:
