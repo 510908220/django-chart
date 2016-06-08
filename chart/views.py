@@ -11,9 +11,9 @@ def index(request):
 
 def string_to_int_or_float(value):
     try:
-        value = int(value.strip())
-    except ValueError:
         value = float(value.strip())
+    except ValueError:
+        value = -1
     return value
 
 
